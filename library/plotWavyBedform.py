@@ -1,7 +1,30 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-def plotWavyBedform():
+#Parameters: n0, lamb, U, g, H, gamm, x: bed waveform 
+#    amplitude, bed waveform wavelength, average 
+#    streamwise velocity, gravitational acceleration, 
+#    average fluid depth, friction coefficient, 
+#    x-domain
+#returns: 3 waveforms in the following order: stream bed,
+#    fluid surface height, depth-averaged streamwise
+#    velocity.
+def getPlots(n0, lamb, U, g, H, gamm, x):
+    alpha = gamm/H
+    beta = g*H/U**2
+    omega = 2*np.pi/lamb
+    u0 = (U/H)*n0*beta*omega/np.sqrt(9*alpha**2 + omega**2*(1-beta)**2)
+    z0 = n0*(9*alpha**2 + omega**2)/np.sqrt(9*alpha**2 + omega**2*(1-beta)**2)
+    phi_u = -np.pi/2 - np.arctan(omega*(1-beta)/(3*alpha))
+    phi_z = np.arctan(omega/(3*alpha)) - np.arctan(omega*(1-beta)/(3*alpha))    
+    n_ = n0*np.cos(omega*x)
+    u_ = u0*np.cos(omega*x + phi_u)
+    z_ = z0*np.cos(omega*x + phi_z)
+    return(n_, z_, u_)
+
+def plotWavyBedform(eta0, lamb, U, g, H, gamma, x):
+	bedform, surface, velocity = getPlots(eta0, lamb, U, g, H, gamma, x)
+
 	#Set up our figure to contain 3 subplots
 	fig, axs = plt.subplots(3, 1, sharex=True, figsize=(12,8))
 	# Remove horizontal space between axes of the 3 subplots
