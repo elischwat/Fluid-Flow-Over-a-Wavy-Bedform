@@ -39,6 +39,7 @@ def plotWavyBedform(eta0, lamb, U, g, H, gamma, x):
 	plt.annotate('$\eta$', xy=(lamb,0), fontsize=22)
 	plt.xlabel('Streamwise Distance (m)')
 	plt.ylabel('Bedform \n Elevation (m)')
+	plt.ticklabel_format(useOffset=False)
 
 	# Plot fluid velocity waveform:
 	plt.subplot2grid((5,3), (0,0), colspan=3, rowspan=1)
@@ -48,6 +49,7 @@ def plotWavyBedform(eta0, lamb, U, g, H, gamma, x):
 	ax.spines['right'].set_visible(False); ax.spines['top'].set_visible(False); ax.spines['bottom'].set_visible(False)
 	plt.annotate('$u$', xy=(lamb,1.0), fontsize=22)
 	plt.ylabel('Velocity (m/s)')
+	plt.ticklabel_format(useOffset=False)
 
 	# Plot fluid surface waveform:
 	plt.subplot2grid((5,3), (1,0), colspan=3, rowspan=2)
@@ -58,4 +60,5 @@ def plotWavyBedform(eta0, lamb, U, g, H, gamma, x):
 	ax.spines['bottom'].set_visible(False); ax.spines['right'].set_visible(False); ax.spines['top'].set_visible(False)
 	plt.annotate('$\zeta$', xy=(lamb,1.0), fontsize=22)
 	plt.ylabel('Water Surface \n Elevation (m)')
+	plt.ticklabel_format(useOffset=False)
 	plt.show()
